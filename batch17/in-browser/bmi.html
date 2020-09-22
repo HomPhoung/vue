@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI Caculation</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+
+</head>
+<body>
+	<div id="app">
+		<h1>{{ message }}</h1>
+		
+		<div>
+			<form>
+				<table>
+					<tbody>
+						
+
+						<tr>
+							<td style="text-align:right;width:30%;">Your Weight:&nbsp;</td>
+							<td style="text-align:left;"><input type="text" name="weight" v-model="weight">pounds</td>
+						</tr><br>
+						<tr>
+							<td style="text-align:right;width:30%;">Your Height:&nbsp;</td>
+							<td style="text-align:left;"><input type="text" name="feet" v-model="feet">
+							feet</td>
+						</tr><br>
+						<tr>
+							<td style="text-align:right;">&nbsp;</td>
+
+							<td style="text-align:left;"><input type="text" name="inch" v-model="inch">inches</td>
+						</tr><br><br>
+
+										
+						
+						</tbody>
+				  </table>
+				</form>
+			</div>	
+
+			<button v-on:click="bmiCalculate" >Compute BMI</button>
+
+			<!-- <label>Your BMI:</label> -->
+			<input type="text" id="color" v-model="bmi" ><br><br>
+
+            <h3>Categories: </h3>
+
+			<div class="flex" style="display: flex">
+				<button style="background-color: yellow" ></button>&nbsp;Underweight (<18.5)</div><br><br>
+				<div class="flex" style="display: flex">
+
+					<button style="background-color: green"></button>&nbsp;Notmal weight (18.5–24.9 )</div><br><br>
+					<div class="flex" style="display: flex">
+
+						<button style="background-color: orange"></button>&nbsp;Overweight ( 25–29.9 )</div><br><br>
+						<div class="flex" style="display: flex">
+
+							<button style="background-color: red"></button> &nbsp;Obesity (>30)
+
+						</div>
+
+
+					</div>
+					<script type="text/javascript">
+						var app = new Vue({
+							el: '#app',
+							data: {
+								message: 'BMI Calculator',
+								weight :'',
+								feet :'',
+								inch : '',
+								bmi : ''
+
+
+							},
+							methods: {
+								bmiCalculate : function(){
+									var weights= parseInt(this.weight);
+
+									var feets=parseInt(this.feet);
+									var inche1=parseInt(this.inch);
+									var inche2=feets*12;
+									var height=inche1+inche2;
+									var total=((weights/(height*height))*703).toFixed(1);
+									this.bmi=total;
+
+									if(total<18.5){
+										$("#color").css("background-color","yellow");
+									}else if(total>=18.5 && total<24.9){
+										$("#color").css("background-color","green");
+									}else if(total>=25 && total<29.9 ){
+										$("#color").css("background-color","orange");
+									}else{
+										$("#color").css("background-color","red");
+									}
+
+
+								}
+
+							},
+								
+
+						})
+					</script>
+				</body>
+				</html>
